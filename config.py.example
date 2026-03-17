@@ -1,0 +1,64 @@
+"""
+Configuration settings for the web monitor.
+Fill in your SMTP credentials and customize the monitored URLs.
+"""
+
+# =============================================================================
+# SMTP EMAIL CONFIGURATION
+# =============================================================================
+# Fill in your SMTP server details below
+
+SMTP_SERVER = ""          # SMTP server address (e.g., smtp.gmail.com)
+SMTP_PORT =                             # SMTP port (587 for TLS, 465 for SSL)
+SMTP_USERNAME = ""   # Your email address
+SMTP_PASSWORD = ""        # Your email password or app-specific password
+SMTP_USE_TLS = False                        # Use TLS encryption
+
+# Email settings
+SENDER_EMAIL = ""    # Sender email address
+RECIPIENT_EMAILS = [                       # List of recipients to notify
+]
+
+# =============================================================================
+# MONITORED URLS CONFIGURATION
+# =============================================================================
+# Each entry should have:
+#   - url: The page URL to monitor
+#   - table_id: The HTML table ID to track
+#   - name: A friendly name for logging/notifications
+
+MONITORED_URLS = [
+    {
+        "url": "",
+        "table_id": "",
+        "name": "",
+    },
+    # Add more URLs to monitor here:
+    # {
+    #     "url": "https://example.com/another-page",
+    #     "table_id": "some-table-id",
+    #     "name": "Another Page",
+    # },
+]
+
+# =============================================================================
+# MONITORING SETTINGS
+# =============================================================================
+
+# How often to check for changes (in seconds)
+CHECK_INTERVAL = 300  # Default: 5 minutes
+
+# Daily report settings
+DAILY_REPORT_ENABLED = True
+DAILY_REPORT_TIME = "18:00"  # Time to send daily report (24h format, e.g., "18:00" for 6 PM)
+
+# Database file path
+DATABASE_PATH = "monitor_state.db"
+
+# Logging settings
+LOG_FILE = "monitor.log"
+LOG_LEVEL = "INFO"  # DEBUG, INFO, WARNING, ERROR, CRITICAL
+
+# Request settings
+REQUEST_TIMEOUT = 30  # Timeout for HTTP requests in seconds
+USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
