@@ -264,7 +264,7 @@ def send_test_email() -> bool:
 
 
 def send_greeting_email(monitored_targets: List[Dict], check_interval: int) -> bool:
-    """Send a grouped startup email when the monitor starts."""
+    """Send one startup email per recipient listing that recipient's targets."""
 
     from datetime import datetime
 
@@ -272,7 +272,7 @@ def send_greeting_email(monitored_targets: List[Dict], check_interval: int) -> b
     interval_text = f"{check_interval // 60} minutes" if check_interval >= 60 else f"{check_interval} seconds"
     sent_any = False
 
-    for recipients, targets in group_targets_by_recipients(monitored_targets).items():
+    for recipient, targets in group_targets_by_recipient(monitored_targets).items():
         targets_html = ""
         for target in targets:
             targets_html += f"""
@@ -315,14 +315,14 @@ def send_greeting_email(monitored_targets: List[Dict], check_interval: int) -> b
 
             <hr style="border: none; border-top: 1px solid #ddd; margin: 20px 0;">
             <p style="color: #666; font-size: 12px;">
-                You will receive notifications only for the targets assigned to this recipient list.
+                You will receive notifications only for the targets listed in this email.
             </p>
         </body>
         </html>
         """
 
         subject = f"[Web Monitor] Monitoring Started - {len(targets)} target(s)"
-        sent_any = send_email(subject, body, list(recipients)) or sent_any
+        sent_any = send_email(subject, body, [recipient]) or sent_any
 
     return sent_any
 
